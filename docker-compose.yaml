@@ -25,6 +25,19 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  frontend: 
+    container_name: studia_frontend_dev
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - api 
+
 volumes:
   mysql-data:
     name: studia-mysql-data

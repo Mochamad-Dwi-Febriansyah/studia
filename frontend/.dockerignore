@@ -1,0 +1,7 @@
+# Abaikan folder dependensi, biarkan Docker yang mengurusnya di dalam container
+/node_modules
+
+# Abaikan folder output dari Nuxt
+.nuxt
+dist
+.output
