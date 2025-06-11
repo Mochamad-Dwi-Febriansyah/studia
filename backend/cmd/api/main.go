@@ -10,7 +10,7 @@ func main() {
 	router := gin.Default()
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"messsage" : "pong",
+			"messsage" : "pong pong",
 		})
 	}) 
 	router.Run()
