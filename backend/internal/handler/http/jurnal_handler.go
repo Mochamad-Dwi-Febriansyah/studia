@@ -13,21 +13,22 @@ type JurnalHandler struct {
 	jurnalUsecase usecase.JurnalUsecase
 }
 
-func NewJurnalHandler(jurnalUsecase usecase.JurnalUsecase) *JurnalHandler {
-	return &JurnalHandler{
+func NewJurnalHandler(router *gin.RouterGroup, jurnalUsecase usecase.JurnalUsecase) {
+	handler :=  &JurnalHandler{
 		jurnalUsecase: jurnalUsecase,
 	}
+
+	publicJurnal := router.Group("journals")
+	{
+		publicJurnal.POST("/", handler.Create)
+		publicJurnal.GET("/", handler.FindAll)
+		publicJurnal.GET("/:id", handler.FindByID)
+		publicJurnal.PUT("/:id", handler.Update)
+		publicJurnal.DELETE("/:id", handler.Delete)
+	}
+
 }
 
-type CreateJurnalRequest struct {
-	Activity string `json:"activity" binding:"required"`
-	Description string 	`json:"description" binding:"required"`
-}
- 
-type UpdateJurnalRequest struct {
-    Activity    *string `json:"activity"`
-    Description *string `json:"description"`
-}
 
 func (h *JurnalHandler) Create(c *gin.Context){
 	var req CreateJurnalRequest
@@ -91,7 +92,7 @@ func (h *JurnalHandler) Update(c *gin.Context) {
 	}
 
 	jurnal := &domain.Jurnal{
-		ID:          &id,
+		ID:          id,
 		Activity:    *req.Activity,
 		Description: *req.Description,
 	}
