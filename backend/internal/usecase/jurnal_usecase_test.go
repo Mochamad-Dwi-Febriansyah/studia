@@ -49,7 +49,7 @@ func (m *MockJurnalRepository) Delete(ctx context.Context, id *uuid.UUID) error 
 func TestJurnalUsecase_Create(t *testing.T){
 	mockRepo := new(MockJurnalRepository)
 	jurnalInput := &domain.Jurnal{
-		ID: func() *uuid.UUID { u, _ := uuid.NewRandom(); return &u }(),
+		ID:  uuid.New(),
 		Activity: "Mengerjakan tugas Go",
 		Description: "Membuat unit test untuk usecase",
 	}
@@ -103,7 +103,7 @@ func TestJurnalUsecase_FindAll_Error(t *testing.T) {
 func TestJurnalUsecase_Update_Success(t *testing.T) {
 	mockRepo := new(MockJurnalRepository)
 	jurnalToUpdate := &domain.Jurnal{
-		ID:       func() *uuid.UUID { u, _ := uuid.NewRandom(); return &u }(),
+		ID:       uuid.New(),
 		Activity: "Aktivitas yang sudah diupdate",
 	}
 	mockRepo.On("Update", mock.Anything, mock.AnythingOfType("*domain.Jurnal")).Return(nil)
