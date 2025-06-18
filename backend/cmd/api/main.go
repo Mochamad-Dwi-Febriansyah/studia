@@ -24,7 +24,7 @@ func main() {
 	dbConfig := database.Config{
 		Host:     getEnv("DB_HOST", "localhost"), 
 		User:     getEnv("DB_USER", "root"),
-		Password: getEnv("DB_PASSWORD", "Terserah123."),  
+		Password: getEnv("DB_PASSWORD", "123"),  
 		DBName:   getEnv("DB_NAME", "db_studia"),
 		Port:     getEnv("DB_PORT", "3306"),
 	} 
