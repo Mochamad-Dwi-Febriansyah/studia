@@ -17,7 +17,7 @@ type CategoryRepository struct {
 }
 
 // Delete provides a mock function with given fields: ctx, id
-func (_m *CategoryRepository) Delete(ctx context.Context, id uuid.UUID) error {
+func (_m *CategoryRepository) Delete(ctx context.Context, id *uuid.UUID) error {
 	ret := _m.Called(ctx, id)
 
 	if len(ret) == 0 {
@@ -25,7 +25,7 @@ func (_m *CategoryRepository) Delete(ctx context.Context, id uuid.UUID) error {
 	}
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, uuid.UUID) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *uuid.UUID) error); ok {
 		r0 = rf(ctx, id)
 	} else {
 		r0 = ret.Error(0)
@@ -65,7 +65,7 @@ func (_m *CategoryRepository) FindAll(ctx context.Context) ([]domain.Category, e
 }
 
 // FindByID provides a mock function with given fields: ctx, id
-func (_m *CategoryRepository) FindByID(ctx context.Context, id uuid.UUID) (*domain.Category, error) {
+func (_m *CategoryRepository) FindByID(ctx context.Context, id *uuid.UUID) (*domain.Category, error) {
 	ret := _m.Called(ctx, id)
 
 	if len(ret) == 0 {
@@ -74,10 +74,10 @@ func (_m *CategoryRepository) FindByID(ctx context.Context, id uuid.UUID) (*doma
 
 	var r0 *domain.Category
 	var r1 error
-	if rf, ok := ret.Get(0).(func(context.Context, uuid.UUID) (*domain.Category, error)); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *uuid.UUID) (*domain.Category, error)); ok {
 		return rf(ctx, id)
 	}
-	if rf, ok := ret.Get(0).(func(context.Context, uuid.UUID) *domain.Category); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *uuid.UUID) *domain.Category); ok {
 		r0 = rf(ctx, id)
 	} else {
 		if ret.Get(0) != nil {
@@ -85,7 +85,7 @@ func (_m *CategoryRepository) FindByID(ctx context.Context, id uuid.UUID) (*doma
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(context.Context, uuid.UUID) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *uuid.UUID) error); ok {
 		r1 = rf(ctx, id)
 	} else {
 		r1 = ret.Error(1)
