@@ -128,3 +128,17 @@ func TestJurnalUsecase_Delete_Success(t *testing.T) {
 	assert.NoError(t, err)
 	mockRepo.AssertExpectations(t)
 }
+
+
+func TestCreate_GenerateSlug(t *testing.T){
+	mockRepo := new(MockJurnalRepository)
+	jurnalInput := &domain.Jurnal{
+		Activity: "Mengerjakan tugas Go",
+		Description: "Membuat unit test untuk usecase",
+	}
+	mockRepo.On("Save", mock.Anything, mock.Anything).Return(nil)
+	uc := NewJurnalUsecase(mockRepo, 2*time.Second)
+	err := uc.Create(context.Background(), jurnalInput)
+	assert.NoError(t, err)
+	assert.NotEmpty(t, jurnalInput.Slug, "Slug should be generated")
+}

@@ -34,6 +34,7 @@ func (h *CategoryHandler) Create(c *gin.Context) {
 		return
 	}
 	category := &domain.Category{
+		ID:          uuid.New(),
 		Name:        req.Name,
 		Slug:        req.Slug,
 		Description: req.Description,

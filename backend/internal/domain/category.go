@@ -15,7 +15,7 @@ const (
 type Category struct {
 	ID   uuid.UUID `gorm:"type:char(36);primaryKey" json:"id"`
 	Name string    `gorm:"not null" json:"name"`
-	Slug string `gorm:"null;uniqueIndex" json:"slug"`  
+	Slug string `gorm:"type:varchar(191);null;uniqueIndex" json:"slug"`  
 	Description string `gorm:"type:text" json:"description"`
 	StatusView StatusView `gorm:"type:varchar(15)" json:"status_view"`
 	CreatedAt string    `json:"created_at"`
