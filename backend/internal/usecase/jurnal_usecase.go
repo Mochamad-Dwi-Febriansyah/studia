@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"context"
+	"strings"
 	"studia/backend/internal/domain"
 	"time"
 
@@ -31,6 +32,10 @@ func NewJurnalUsecase(jurnalRepo domain.JurnalRepository, timeout time.Duration)
 func (uc *jurnalUsecase) Create(ctx context.Context, jurnal *domain.Jurnal) error {
 	ctx, cancel := context.WithTimeout(ctx, uc.contextTimeout)
 	defer cancel()
+
+	if jurnal.Activity != "" {
+		jurnal.Slug = generateSlug(jurnal.Activity)
+	}
 
 	jurnal.Status = domain.StatusPending
 
@@ -68,4 +73,13 @@ func (uc *jurnalUsecase) Delete(ctx context.Context, id *uuid.UUID) error {
 	defer cancel()
 
 	return uc.jurnalRepo.Delete(ctx, id)
+}
+
+func generateSlug(activity string) string {
+	activity = strings.ToLower(activity)
+	activity = strings.TrimSpace(activity)
+	activity = strings.ReplaceAll(activity, " ", "-")
+	activity = strings.ReplaceAll(activity, "_", "-")
+	activity = strings.ReplaceAll(activity, ".", "")
+	return activity
 }

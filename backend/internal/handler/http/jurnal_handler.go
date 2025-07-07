@@ -39,8 +39,9 @@ func (h *JurnalHandler) Create(c *gin.Context){
 	}
 
 	jurnal := &domain.Jurnal{
+		ID: uuid.New(),
 		Activity: req.Activity,
-		Description: req.Description,
+		Description: req.Description, 
 	}
 
 	if err := h.jurnalUsecase.Create(c.Request.Context(), jurnal); err != nil {

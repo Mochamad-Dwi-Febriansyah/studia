@@ -31,7 +31,10 @@ func NewMySQLDatabase(config Config) *gorm.DB {
 		log.Fatalf("Gagal terhubung ke database: %v", err)
 	}
  
-	db.AutoMigrate(&domain.Jurnal{})
+	db.AutoMigrate(
+		&domain.Jurnal{},
+		&domain.Category{},
+	)
 
 	log.Println("Koneksi database MySQL dan migrasi berhasil.")
 
